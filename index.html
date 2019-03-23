@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>MultiElement Desktop Scheduler</title>
+<link rel="stylesheet" type="text/css" href="/Users/Eric/Documents/SwengProject/mystyle.css">
+<link rel='stylesheet'
+	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' />
+<style>
+	.fc-time-grid .fc-slats td{height:5.5em;border-bottom:0}
+</style>
+
+
+<link rel='stylesheet'
+	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar-scheduler/1.9.4/scheduler.min.css' />
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://momentjs.com/downloads/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar-scheduler/1.9.4/scheduler.min.js'></script>
+<script src='/Users/Eric/Documents/SwengProject/myscript.js'></script>
+<script>
+	$(document).ready(BuildCalendar());
+</script>
+
+
+</head>
+
+
+
+<body>
+
+	<div class="header">MultiElement Desktop Scheduler</div>
+
+	<div class="topnav">
+		<ul>
+			<li><a class="active" href="#home">Admin</a></li>
+			<li><a href="#news">Reports</a></li>
+			<li><a href="#contact">Help</a></li>
+			<li><a href="#about">About</a></li>
+		</ul>
+	</div>
+
+
+	<div class="row">
+		<div class="column_entry">
+			<form action="/action_page.php">
+				<br> Build: <select id="Build" name="Build">
+					<option value="BLD24">BLD24</option>
+					<option value="BLD25">BLD25</option>
+					<option value="BLD26">BLD26</option>
+					<option value="BLD27">BLD27</option>
+					</select>
+				<br> Desktop: <select id="Desktop" name="Desktops">
+					<option value="MES1">MES1</option>
+					<option value="MES2">MES2</option>
+					<option value="MES3">MES3</option>
+					<option value="MES4">MES4</option>
+				</select> <br> <br>
+
+				<br><style> table, th, td {
+					border: 1px solid black;
+				  }
+				  </style>
+				  </head>
+				  <body>
+				  <br><table style="width:100%">
+					<tr>
+					  <th>Your Reserved Slots</th>
+					  </tr>
+					<tr>
+					  <td>Date:
+					  <br>Time:
+					  <br>Desktop:
+					  <br>Build:</td>
+					  </tr>
+				  <tr>
+					  <td>Date:
+					  <br>Time:
+					  <br>Desktop:
+					  <br>Build:</td>
+					  </tr>
+				  <tr>
+					  <td>Date:
+					  <br>Time:
+					  <br>Desktop:
+					  <br>Build:</td>
+					  </tr>
+					
+				  </table> <br>
+				  
+				
+
+				<input type="submit" value="Submit All Requests">
+			</form>
+		</div>
+
+		<div class="column_content" id='calendar'></div>
+
+	</div>
+
+	<div class="footer">
+		<p>Team Elephants - Project Koala Saltarin 2019</p>
+	</div>
+
+</body>
+
+</html>
