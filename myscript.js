@@ -2,15 +2,7 @@
   Needs proper license disclaimer https://fullcalendar.io/license
 
  */
-function submitFunction() {
-	var x = document.getElementById("Desktop").value;
-	document.getElementById("demo").innerHTML = x;
-}
 
-function getDesktopName(){
-    var x = document.getElementById("Desktop").value;
-	document.getElementById("desktopName").innerHTML = x;
-}
 
 function getTodaysDate() {
 	var today = new Date();
@@ -30,16 +22,6 @@ function getTodaysDate() {
 	return today;
 }
 
-function checkForPopupMenu(){
-	var x = document.getElementById("Desktop").value;
-	if(x == ""){
-		alert("You must select a desktop and submit to view anything in the schedule")
-	}
-	else{
-		window.open("/Users/cassa/OneDrive/Documents/SWENG/Scheduler-master/popup.html", "", "fullscreen = no, width = 600, height = 600")
-	}
-}
-
 /*
  * This function copies the start and end times
  * to the html textboxes.
@@ -48,8 +30,29 @@ function setStartEndTime(start, end) {
 	var a = new Date(start);
 	var b = new Date(end);
 
-	document.getElementById("start_time").value = a.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
-	document.getElementById("end_time").value = b.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
+	
+}
+
+function filterOptions(bld,dsk){
+	var build = document.getElementById(bld);
+	var desktop = document.getElementById(dsk);
+	desktop.innerHTML = '';
+	//when build value is "NONE" deskotp must deplay all the options.
+	switch(build.value)
+	{
+		case "BLD25": var arrayofOptions = ["MES1|MES1","MES3|MES3"];
+		break;
+		case "BLD26": var arrayofOptions = ["MES4|MES4"];
+		break;
+		default: ;
+	}
+	for(var desk in arrayofOptions){
+		var deskToDisplay = arrayofOptions[desk].split("|");
+		var newDeskOption = document.createElement("option");
+		newDeskOption.value = deskToDisplay[0];
+		newDeskOption.innerHTML = deskToDisplay[1];
+		desktop.options.add(newDeskOption);
+	}
 
 }
 
@@ -77,7 +80,8 @@ function BuildCalendar() {
 			resources: [
 				{ id: 'MES1', desktop: 'TI-12', title: 'MES1', eventColor: 'blue' },
 				{ id: 'MES2', desktop: 'TI-16', title: 'MES2', eventColor: 'green' },
-				{ id: 'MES3', desktop: 'TI-16', title: 'MES3', eventColor: 'orange' }
+				{ id: 'MES3', desktop: 'TI-16', title: 'MES3', eventColor: 'orange' },
+				{id: 'MES4', desktop: 'TI-16', title: 'MES4', eventColor: 'red'}
 				],
 
 				header: {
@@ -91,10 +95,8 @@ function BuildCalendar() {
 
 				select: function(start, end) {
 					
-					checkForPopupMenu();
-
 					var quantity = $('.fc-event').length;
-					if (document.getElementById("Desktop").value == "" || quantity > 3 )
+					if (quantity > 3)
 					{
 						$('#calendar').fullCalendar('unselect');
 						// alert('You can only select a maximum of three slots!')
