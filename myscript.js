@@ -7,6 +7,11 @@ function submitFunction() {
 	document.getElementById("demo").innerHTML = x;
 }
 
+function getDesktopName(){
+    var x = document.getElementById("Desktop").value;
+	document.getElementById("desktopName").innerHTML = x;
+}
+
 function getTodaysDate() {
 	var today = new Date();
 	var dd = today.getDate();
@@ -23,6 +28,16 @@ function getTodaysDate() {
 	today = yyyy + '-' + mm + '-' + dd;
 
 	return today;
+}
+
+function checkForPopupMenu(){
+	var x = document.getElementById("Desktop").value;
+	if(x == ""){
+		alert("You must select a desktop and submit to view anything in the schedule")
+	}
+	else{
+		window.open("/Users/cassa/OneDrive/Documents/SWENG/Scheduler-master/popup.html", "", "fullscreen = no, width = 600, height = 600")
+	}
 }
 
 /*
@@ -76,10 +91,10 @@ function BuildCalendar() {
 
 				select: function(start, end) {
 					
-					window.open("", "", "fullscreen = no, width = 600, height = 600");
+					checkForPopupMenu();
 
 					var quantity = $('.fc-event').length;
-					if (quantity > 3)
+					if (document.getElementById("Desktop").value == "" || quantity > 3 )
 					{
 						$('#calendar').fullCalendar('unselect');
 						// alert('You can only select a maximum of three slots!')
