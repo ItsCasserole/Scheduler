@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <title>MultiElement Desktop Scheduler</title>
-<link rel="stylesheet" type="text/css" href="/Users/cassa/OneDrive/Documents/SWENG/Scheduler-master/mystyle.css">
+<link rel="stylesheet" type="text/css" href="/Users/Eric/Documents/SwengProject/mystyle.css">
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' />
 <style>
@@ -19,7 +19,7 @@
 <script src='https://momentjs.com/downloads/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar-scheduler/1.9.4/scheduler.min.js'></script>
-<script src='/Users/cassa/OneDrive/Documents/SWENG/Scheduler-master/myscript.js'></script>
+<script src='/Users/Eric/Documents/SwengProject/myscript.js'></script>
 <script>
 	$(document).ready(BuildCalendar());
 </script>
@@ -46,24 +46,19 @@
 	<div class="row">
 		<div class="column_entry">
 			<form action="/action_page.php">
-				<br> Currently Displayed:  
-				<p id="demo"></p>
-				<br>
-
-				<br> Build: <select id="Build" name="Build">
-					<option value= ""></option>
+				<br> Build: <select id="Build" name="Build" onchange="filterOptions(this.id,'Desktop')"> 
 					<option value="BLD24">BLD24</option>
 					<option value="BLD25">BLD25</option>
 					<option value="BLD26">BLD26</option>
 					<option value="BLD27">BLD27</option>
 					</select>
 				<br> Desktop: <select id="Desktop" name="Desktops">
-					<option value= ""></option>
-					<option value="MES1">MES1</option>
+					<!---<option value="MES1">MES1</option>
 					<option value="MES2">MES2</option>
 					<option value="MES3">MES3</option>
-					<option value="MES4">MES4</option>
+					<option value="MES4">MES4</option>-->
 				</select> <br> <br>
+				
 
 				<br><style> table, th, td {
 					border: 1px solid black;
@@ -98,8 +93,7 @@
 				  
 				
 
-				<button type="button" onclick="submitFunction(); checkForDesktop(this.form); getDesktopName()">Submit</button>
-
+				<input type="submit" value="Submit All Requests">
 			</form>
 		</div>
 
@@ -109,12 +103,8 @@
 
 	<div class="footer">
 		<p>Team Elephants - Project Koala Saltarin 2019</p>
-<script language = "javascript">
-function checkForDesktop(form) {
-	if(form.Desktop.value == ""){
-		alert("You must select a desktop")
-	}
-}</script>
+	</div>
+
 </body>
 
 </html>
