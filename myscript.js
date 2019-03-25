@@ -2,7 +2,10 @@
   Needs proper license disclaimer https://fullcalendar.io/license
 
  */
-
+function submitFunction() {
+	var x = document.getElementById("Desktop").value;
+	document.getElementById("demo").innerHTML = x;
+}
 
 function getTodaysDate() {
 	var today = new Date();
@@ -73,6 +76,8 @@ function BuildCalendar() {
 
 				select: function(start, end) {
 					
+					window.open("", "", "fullscreen = no, width = 600, height = 600");
+
 					var quantity = $('.fc-event').length;
 					if (quantity > 3)
 					{
