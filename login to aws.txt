@@ -1,0 +1,5 @@
+/*in git bash*/
+
+cd /Whatever the path is to your pem file/
+chmod 775 scheduler_elephants.pem
+ssh -i scheduler_elephants.pem ubuntu@3.87.40.86
