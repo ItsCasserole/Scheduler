@@ -4,6 +4,57 @@
  */
 
 
+
+//returns the name of the currently displayed desktop
+
+var startTime, endTime, currDesktop;
+
+var submitted = 0;
+
+function submitFunction() {
+	var x = document.getElementById("Desktop").value;
+	document.getElementById("demo").innerHTML = x;
+	if(x != ""){
+		submitted = 1;
+	}
+}
+
+function checkForPopup(){
+	if(submitted == 0){
+		alert("You must submit a desktop choice to view time slot information.");
+		return false;
+	}
+	else{
+		window.open("popup.html","Information Window","width = 600px, height = 600px");
+		document.getElementById("desk").innerHTML = currDesktop;
+		return true;
+	}
+}
+
+function setDesktop(){
+	currDesktop = document.getElementById("Desktop");
+}
+
+function getDesktop(){
+	return currDesktop;
+}
+
+function setStartTime(num){
+	startTime = num;
+}
+
+function getStartTime(){
+	return startTime;
+}
+
+function setEndTime(num){
+	endTime = num;
+}
+
+function getEndTime(){
+	return endTime;
+}
+
 function getTodaysDate() {
 	var today = new Date();
 	var dd = today.getDate();
@@ -30,29 +81,8 @@ function setStartEndTime(start, end) {
 	var a = new Date(start);
 	var b = new Date(end);
 
-	
-}
-
-function filterOptions(bld,dsk){
-	var build = document.getElementById(bld);
-	var desktop = document.getElementById(dsk);
-	desktop.innerHTML = '';
-	//when build value is "NONE" deskotp must deplay all the options.
-	switch(build.value)
-	{
-		case "BLD25": var arrayofOptions = ["MES1|MES1","MES3|MES3"];
-		break;
-		case "BLD26": var arrayofOptions = ["MES4|MES4"];
-		break;
-		default: ;
-	}
-	for(var desk in arrayofOptions){
-		var deskToDisplay = arrayofOptions[desk].split("|");
-		var newDeskOption = document.createElement("option");
-		newDeskOption.value = deskToDisplay[0];
-		newDeskOption.innerHTML = deskToDisplay[1];
-		desktop.options.add(newDeskOption);
-	}
+	document.getElementById("start_time").value = a.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
+	document.getElementById("end_time").value = b.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
 
 }
 
@@ -80,8 +110,7 @@ function BuildCalendar() {
 			resources: [
 				{ id: 'MES1', desktop: 'TI-12', title: 'MES1', eventColor: 'blue' },
 				{ id: 'MES2', desktop: 'TI-16', title: 'MES2', eventColor: 'green' },
-				{ id: 'MES3', desktop: 'TI-16', title: 'MES3', eventColor: 'orange' },
-				{id: 'MES4', desktop: 'TI-16', title: 'MES4', eventColor: 'red'}
+				{ id: 'MES3', desktop: 'TI-16', title: 'MES3', eventColor: 'orange' }
 				],
 
 				header: {
@@ -95,8 +124,10 @@ function BuildCalendar() {
 
 				select: function(start, end) {
 					
+					var check = checkForPopup();
+
 					var quantity = $('.fc-event').length;
-					if (quantity > 3)
+					if (check == false || quantity > 3)
 					{
 						$('#calendar').fullCalendar('unselect');
 						// alert('You can only select a maximum of three slots!')
