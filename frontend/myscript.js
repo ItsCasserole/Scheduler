@@ -3,31 +3,15 @@
 
  */
 
-
-
-//returns the name of the currently displayed desktop
-
 var startTime, endTime, currDesktop;
 
 var submitted = 0;
 
 function submitFunction() {
 	var x = document.getElementById("Desktop").value;
-	document.getElementById("demo").innerHTML = x;
+	document.getElementById("demo").value = x;
 	if(x != ""){
 		submitted = 1;
-	}
-}
-
-function checkForPopup(){
-	if(submitted == 0){
-		alert("You must submit a desktop choice to view time slot information.");
-		return false;
-	}
-	else{
-		window.open("popup.html","Information Window","width = 600px, height = 600px");
-		document.getElementById("desk").innerHTML = currDesktop;
-		return true;
 	}
 }
 
@@ -35,25 +19,24 @@ function setDesktop(){
 	currDesktop = document.getElementById("Desktop");
 }
 
-function getDesktop(){
-	return currDesktop;
+function checkForInfoDisplay(start, end){
+	if(submitted == 1){
+		var a = new Date(start);
+		var b = new Date(end);
+
+		document.getElementById("date").value = "Date: " + a.toLocaleDateString('en-US');
+		document.getElementById("time").value = "Time: " +a.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'})+ " - "+
+		 b.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
+		document.getElementById("desktop").value = "Desktop: " + document.getElementById("Desktop").value;
+		document.getElementById("reservedBy").value = "Reserved By: ";
+		return true;
+	}
+	else{
+		alert("You must select a desktop and submit to see time slot information.")
+		return false;
+	}
 }
 
-function setStartTime(num){
-	startTime = num;
-}
-
-function getStartTime(){
-	return startTime;
-}
-
-function setEndTime(num){
-	endTime = num;
-}
-
-function getEndTime(){
-	return endTime;
-}
 
 function getTodaysDate() {
 	var today = new Date();
@@ -80,10 +63,6 @@ function getTodaysDate() {
 function setStartEndTime(start, end) {
 	var a = new Date(start);
 	var b = new Date(end);
-
-	document.getElementById("start_time").value = a.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
-	document.getElementById("end_time").value = b.toLocaleTimeString('en-US',{hour: '2-digit', minute:'2-digit'});
-
 }
 
 function BuildCalendar() {
@@ -123,19 +102,20 @@ function BuildCalendar() {
 				defaultDate: getTodaysDate(),
 
 				select: function(start, end) {
-					
-					var check = checkForPopup();
-
+					end = start + 1.08e+7; // enforces the 3hr blocks. (milliseconds)
+					var check = checkForInfoDisplay(start, end);
 					var quantity = $('.fc-event').length;
 					if (check == false || quantity > 3)
 					{
 						$('#calendar').fullCalendar('unselect');
-						// alert('You can only select a maximum of three slots!')
+						if(quantity > 3){
+							alert('You can only select a maximum of three slots!')
+						}
 						return
 					}
 
-					end = start + 1.08e+7; // enforces the 3hr blocks. (milliseconds)
-					setStartEndTime(start, end);
+					
+					//setStartEndTime(start, end);
 					//var title = prompt('Event Title:');
 					var eventData;
 					var title =  quantity + "-" + document.getElementById("Build").value;

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <title>MultiElement Desktop Scheduler</title>
-<link rel="stylesheet" type="text/css" href="/Users/cassa/OneDrive/Documents/SWENG/Schedule-stuff/mystyle.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' />
 <style>
@@ -19,7 +19,7 @@
 <script src='https://momentjs.com/downloads/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar-scheduler/1.9.4/scheduler.min.js'></script>
-<script src='/Users/cassa/OneDrive/Documents/SWENG/Schedule-stuff/myscript.js'></script>
+<script src='myscript.js'></script>
 <script>
 	$(document).ready(BuildCalendar());
 </script>
@@ -46,60 +46,53 @@
 	<div class="row">
 		<div class="column_entry">
 			<form action="/action_page.php">
-				<br> Currently Displayed:  
-				<p id="demo"></p>
+				<br> Currently Displayed Schedule: <input type="text" id="demo" name="demo" disabled>
 				<br>
-
-				<br> Build: <select id="Build" name="Build">
-					<option value= ""></option>
+				<br>
+				<br> Build: <select id="Build" name="Builds">
+					<option value=""></option>
 					<option value="BLD24">BLD24</option>
 					<option value="BLD25">BLD25</option>
 					<option value="BLD26">BLD26</option>
 					<option value="BLD27">BLD27</option>
-					</select>
-				<br> Desktop: <select id="Desktop" name="Desktops">
-					<option value= ""></option>
+				</select> <br> Desktop: <select id="Desktop" name="Desktop">
+					<option value=""></option>
 					<option value="MES1">MES1</option>
 					<option value="MES2">MES2</option>
 					<option value="MES3">MES3</option>
 					<option value="MES4">MES4</option>
 				</select> <br> <br>
+				<button type = "button" onclick = "setDesktop(); submitFunction(); checkForDesktop(this.form)">Change Displayed Schedule </button>
+				<br> <br> <br> <br> <br> 
+				<div>
+					Selected Time Slot Information: 
+					<br>
+					<input type="text" id="date" name="date" disabled> 
+					<br>  
+					<input type="text" id="time" name="time" disabled>
+					<br>
+					<input type="text" id="desktop" name="desktop" disabled>
+					<br>
+					<input type="text" id="reservedBy" name="reservedBy" disabled>
+				</div>
+				<div class = "reqRelButtons">
+					<br>
+					<table>
+						<tr>
+							<td>
+								<button>Request</button>
+							</td>
+							<td>
+								<button>Release</button>
+							</td>
+						</tr>
+					</table>
 
-				<br><style> table, th, td {
-					border: 1px solid black;
-				  }
-				  </style>
-				  </head>
-				  <body>
-				  <br><table style="width:100%">
-					<tr>
-					  <th>Your Reserved Slots</th>
-					  </tr>
-					<tr>
-					  <td>Date:
-					  <br>Time:
-					  <br>Desktop:
-					  <br>Build:</td>
-					  </tr>
-				  <tr>
-					  <td>Date:
-					  <br>Time:
-					  <br>Desktop:
-					  <br>Build:</td>
-					  </tr>
-				  <tr>
-					  <td>Date:
-					  <br>Time:
-					  <br>Desktop:
-					  <br>Build:</td>
-					  </tr>
-					
-				  </table> <br>
-				  
+				</div>
+				<br>
+				<br>
+
 				
-
-				<button type="button" onclick="setDesktop(); submitFunction(); checkForDesktop(this.form)">Submit</button>
-
 			</form>
 		</div>
 
@@ -115,6 +108,6 @@ function checkForDesktop(form) {
 		alert("You must select a desktop")
 	}
 }</script>
-</body>
 
+</body>
 </html>
